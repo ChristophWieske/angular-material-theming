@@ -1,0 +1,90 @@
+
+@import 'src/variables.scss';
+@import '~@angular/material/theming';
+@import 'app/script-box/script-box-mixins.scss';
+
+
+$default-font-config: mat-typography-config(
+  $font-family: "Helvetica"
+);
+
+$accessibility-font-config: mat-typography-config(
+  $font-family: "Helvetica",
+  $input: mat-typography-level(24px, 1.125),
+  $caption: mat-typography-level(24px, 1.125),
+  $button: mat-typography-level(24px, 1.125),
+  $headline: mat-typography-level(38px, 1.125),
+  $subheading-1: mat-typography-level(28px, 1.125),
+  $body-1: mat-typography-level(24px, 1.125)
+);
+
+@include script-box-typography($default-font-config);
+@include mat-core($default-font-config);
+
+.accessible {
+  @include script-box-typography($accessibility-font-config);
+  @include angular-material-typography($accessibility-font-config);
+}
+
+
+$primary-colors: (
+  100: lighten($bit-darkblue-color, 10%),
+  200: $bit-darkblue-color,
+  500: $bit-darkblue-color,
+  700: darken($bit-darkblue-color, 10%),
+  contrast: (
+    100: $light-foreground-color,
+    200: $light-foreground-color,
+    500: $light-foreground-color,
+    700: $light-foreground-color
+  )
+);
+$primary: mat-palette($primary-colors);
+
+$accent-colors: (
+  100: lighten($bit-blue-color, 10%),
+  200: $bit-blue-color,
+  500: $bit-blue-color,
+  700: darken($bit-blue-color, 10%),
+  contrast: (
+    100: $dark-foreground-color,
+    200: $light-foreground-color,
+    500: $light-foreground-color,
+    700: $light-foreground-color
+  )
+);
+$accent: mat-palette($accent-colors);
+
+$primary-colors-inverted: (
+  100: $light-foreground-color,
+  200: $light-foreground-color,
+  500: $light-foreground-color,
+  700: $light-foreground-color,
+  contrast: (
+    100: lighten($bit-darkblue-color,10%),
+    200: $bit-darkblue-color,
+    500: $bit-darkblue-color,
+    700: darken($bit-darkblue-color,10%)
+  )
+);
+$primary-inverted: mat-palette($primary-colors-inverted);
+
+$theme: mat-light-theme($primary, $accent);
+@include script-box-theme($theme);
+@include angular-material-theme($theme);
+
+.dark {
+  $theme: mat-dark-theme($primary-inverted, $accent);
+
+  $background-set: map-get($theme, background);
+  $background-set: map-merge($background-set, (
+    background: map-get($primary, darker),
+    card: map-get($primary, default)
+    )
+  );
+  $theme: map-merge($theme, (background: $background-set));
+
+  @include script-box-theme($theme);
+  @include angular-material-theme($theme);
+}
+

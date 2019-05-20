@@ -1,0 +1,26 @@
+/* Color related styles */
+
+@mixin script-box-theme($theme) {
+  $foreground: map-get($theme, foreground);
+  $primary: map-get($theme, primary);
+
+  $underline-color: map-get($foreground , hint-text);
+  $underline-focused-color: map-get($primary, default);
+
+  .script-box .script-box-input-wrapper {
+    border-color: $underline-color;
+  }
+
+  .script-box .script-box-underline {
+    background: $underline-focused-color;
+  }
+}
+
+@mixin script-box-typography($config) {
+
+  $input-level: map-get($config, input);
+
+  .script-box-input {
+    font-size: map-get($input-level, font-size);
+  }
+}
