@@ -1,10 +1,26 @@
 <div class="horizontal-filler">
   <div class="container">
-      <h3>
+      <h3 class="mat-h3">
         Willkommen zu
       </h3>
-      <h1>
+      <h1 class="mat-h1">
         Theming in Angular Material
       </h1>
   </div>
+
+  <mat-slide-toggle
+    color="primary"
+    class="dark-toggle"
+    [checked]="useDarkTheme"
+    (change)="useDarkTheme = $event.checked">
+  dunkel
+  </mat-slide-toggle>
+
+  <mat-slide-toggle
+    color="primary"
+    class="accessibility-toggle"
+    [checked]="useAccessibilitySettings"
+    (change)="useAccessibilitySettings = $event.checked">
+  größer
+  </mat-slide-toggle>
 </div>

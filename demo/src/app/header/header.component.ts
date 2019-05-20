@@ -13,6 +13,7 @@ export class HeaderComponent {
   set useDarkTheme(value: boolean) {
     this._useDarkTheme = value;
     this.useDarkThemeChange.emit(this._useDarkTheme);
+    this.maintainDarkClassOnRoot();
   }
 
   get useDarkTheme() {
@@ -28,6 +29,7 @@ export class HeaderComponent {
   set useAccessibilitySettings(value: boolean) {
     this._useAccessibilitySettings = value;
     this.useAccessibilitySettingsChange.emit(this._useAccessibilitySettings);
+    this.maintainAccessibleClassOnRoot();
   }
 
   get useAccessibilitySettings() {
@@ -37,4 +39,19 @@ export class HeaderComponent {
   @Output()
   useAccessibilitySettingsChange = new EventEmitter<boolean>();
 
+  maintainDarkClassOnRoot() {
+    if (this.useDarkTheme) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
+  maintainAccessibleClassOnRoot() {
+    if (this.useAccessibilitySettings) {
+      document.documentElement.classList.add('accessible');
+    } else {
+      document.documentElement.classList.remove('accessible');
+    }
+  }
 }
